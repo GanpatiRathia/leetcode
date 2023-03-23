@@ -36,7 +36,7 @@ Only one valid answer exists.
 ## Follow-up: Can you come up with an algorithm that is less than O(n^2) time complexity?
 
 ## O(n^2) solution :
-'''cpp
+```cpp
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -53,4 +53,4 @@ public:
         return{};
     }
 };
-'''
+```
