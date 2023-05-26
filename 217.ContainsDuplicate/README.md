@@ -38,7 +38,7 @@ public:
 
 ## Faster than brute force
 
-'''cpp
+```cpp
 // Sorted Approach takes less time than the above and is accepted by leetcode
 class Solution {
 public:
@@ -51,4 +51,4 @@ public:
         return flag;
     }
 };
-'''
+```
