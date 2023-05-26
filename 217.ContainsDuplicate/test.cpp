@@ -18,7 +18,7 @@ public:
 };
 
 // Sorted Approach takes less time than the above and is accepted by leetcode
-class Solution {
+class Solution1 {
 public:
     bool containsDuplicate(vector<int>& nums) {
         sort(nums.begin(),nums.end());
@@ -30,8 +30,23 @@ public:
     }
 };
 
+class Solution2 {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_set<int> numSet;
+        for (int num : nums) {
+            if (numSet.count(num) > 0) {
+                return true;
+            }
+            numSet.insert(num);
+        }
+        return false;
+    }
+};
+
+
 int main() {
-    Solution s;
+    Solution2 s;
     vector<int> v;
     v.push_back(1);
     v.push_back(2);
