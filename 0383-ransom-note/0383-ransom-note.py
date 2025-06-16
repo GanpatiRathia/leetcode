@@ -1,5 +1,3 @@
-from collections import Counter
-
 class Solution(object):
     def canConstruct(self, ransomNote, magazine):
         """
@@ -7,17 +5,27 @@ class Solution(object):
         :type magazine: str
         :rtype: bool
         """
-        # Step 1: Count character frequencies in the magazine
-        magazine_counts = Counter(magazine)
-        
-        # Step 2: Count character frequencies in the ransomNote
-        ransom_note_counts = Counter(ransomNote)
-        
-        # Step 3: Check if ransomNote can be constructed
-        # For each character and its count in ransomNote_counts,
-        # ensure that magazine_counts has at least that many occurrences.
-        for char, count in ransom_note_counts.items():
-            if magazine_counts[char] < count:
-                return False  # Not enough characters in magazine
+        # Optimization 1: Early exit if magazine is shorter than ransomNote.
+        # This is a quick check that avoids unnecessary counting.
+        if len(ransomNote) > len(magazine):
+            return False
+
+        # Use a list of 26 integers for character counts (for lowercase English letters)
+        # This is often faster than a dictionary for fixed-size alphabets
+        # as it avoids hashing and dynamic resizing overhead.
+        magazine_counts = [0] * 26 
+
+        # Populate counts for magazine
+        # ord(char) - ord('a') converts 'a' to 0, 'b' to 1, etc.
+        for char_code in map(ord, magazine):
+            magazine_counts[char_code - ord('a')] += 1
+
+        # Check against ransomNote
+        for char_code in map(ord, ransomNote):
+            index = char_code - ord('a')
+            if magazine_counts[index] > 0:
+                magazine_counts[index] -= 1  # Use the character
+            else:
+                return False  # Not enough of this character
                 
-        return True # All characters can be constructed
+        return True
