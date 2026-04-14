@@ -1,72 +1,42 @@
-# leetcode
+<h2><a href="https://leetcode.com/problems/contains-duplicate/">217. Contains Duplicate</a></h2><h3>Easy</h3><hr><p>Given an integer array <code>nums</code>, return <code>true</code> if any value appears <strong>at least twice</strong> in the array, and return <code>false</code> if every element is distinct.</p>
 
-## 1. 217. Contains Duplicate
-Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+<p>&nbsp;</p>
+<p><strong class="example">Example 1:</strong></p>
 
-## Example 1:
-Input: nums = [1,2,3,1]
-Output: true
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">nums = [1,2,3,1]</span></p>
 
-## Example 2:
-Input: nums = [1,2,3,4]
-Output: false
+<p><strong>Output:</strong> <span class="example-io">true</span></p>
 
-## Example 3:
-Input: nums = [1,1,1,3,3,4,3,2,4,2]
-Output: true
+<p><strong>Explanation:</strong></p>
 
-## Constraints:
-1 <= nums.length <= 105
--109 <= nums[i] <= 109
+<p>The element 1 occurs at the indices 0 and 3.</p>
+</div>
 
-## O(n^2) solution :
-```cpp
-class Solution {
-public:
-    bool containsDuplicate(vector<int>& nums) {
-        for (auto i = nums.begin();i<nums.end();i++){
-            for (auto j = nums.begin();j<nums.end();j++){
-                if(i != j)
-                    if(*i == *j)
-                        return true;
-            }
-        }
-        return false;
-    }
-};
-```
+<p><strong class="example">Example 2:</strong></p>
 
-## Faster than brute force
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">nums = [1,2,3,4]</span></p>
 
-```cpp
-// Sorted Approach takes less time than the above and is accepted by leetcode
-class Solution {
-public:
-    bool containsDuplicate(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
-        bool flag = false;
-        for(int i =0;i<nums.size()-1;i++){
-            if(nums[i] == nums[i+1]) return true;
-        }
-        return flag;
-    }
-};
-```
+<p><strong>Output:</strong> <span class="example-io">false</span></p>
 
-## Another approach :
+<p><strong>Explanation:</strong></p>
 
-```cpp
-class Solution {
-public:
-    bool containsDuplicate(vector<int>& nums) {
-        unordered_set<int> numSet;
-        for (int num : nums) {
-            if (numSet.count(num) > 0) {
-                return true;
-            }
-            numSet.insert(num);
-        }
-        return false;
-    }
-};
-```
+<p>All elements are distinct.</p>
+</div>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">nums = [1,1,1,3,3,4,3,2,4,2]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">true</span></p>
+</div>
+
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
+</ul>
